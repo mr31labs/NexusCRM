@@ -23,6 +23,30 @@ Because this is a vanilla HTML/CSS/JS application, no build steps are required.
    ```
 3. Navigate to `http://localhost:3000` (or whichever port your server uses) in your web browser.
 
+## Screenshots
+
+**Sales Pipeline Dashboard**
+![Sales Pipeline](docs/screenshots/pipeline_desktop.png)
+
+**AI Email Assistant**
+![AI Assistant Email Draft](docs/screenshots/ai_draft.png)
+
+**Mobile Responsiveness**
+![Mobile View of Pipeline](docs/screenshots/pipeline_mobile.png)
+
+## E2E Testing Plan & Results
+
+The complete CRM has been rigorously tested using automated browser agents acting as a Sales Persona.
+
+### Test Scenarios Passed
+1. **Mobile Responsiveness Test**
+   - Resized viewport to 400x800. verified the navigation `.sidebar` successfully collapses into a hamburger menu.
+   - Tested adding new Contacts and Deals from a mobile viewport, including injecting detailed text into the `Notes` element.
+   - Verified that the main Revenue Forecast Chart renders accurately on constrained mobile displays.
+2. **Desktop System Verification**
+   - Tested tracking a Deal transitioning into the `Lost` stage. Verified the Chart.js visualizer automatically aggregates the lost values and dynamically renders the `Lost` bar in red to maintain full visibility of pipeline failure rates.
+   - Operated the `AI Assistant` directly from the Pipeline View to quickly draft an email reconnecting with the lost customer, asserting the Generative AI accurately parses contextual information.
+
 ## 🛑 License & Terms of Use
 
 This software is a proprietary prototype. All rights are reserved by the author.
