@@ -12,9 +12,9 @@ const defaultData = {
         theme: 'dark'
     },
     contacts: [
-        { id: 'c1', name: 'Alice Cooper', email: 'alice@example.com', company: 'Acme Corp', phone: '555-0101', notes: 'Interested in premium tier.' },
-        { id: 'c2', name: 'Bob Dylan', email: 'bob@example.com', company: 'Bob Inc', phone: '555-0102', notes: 'Requires custom integration.' },
-        { id: 'c3', name: 'Charlie Brown', email: 'charlie@example.com', company: 'Peanuts LLC', phone: '555-0103', notes: 'Follow up next week.' }
+        { id: 'c1', name: 'Alice Cooper', email: 'alice@example.com', company: 'Acme Corp', phone: '555-0101', mobile: '555-0201', preferredContact: 'email', notes: 'Interested in premium tier.' },
+        { id: 'c2', name: 'Bob Dylan', email: 'bob@example.com', company: 'Bob Inc', phone: '555-0102', mobile: '555-0202', preferredContact: 'phone', notes: 'Requires custom integration.' },
+        { id: 'c3', name: 'Charlie Brown', email: 'charlie@example.com', company: 'Peanuts LLC', phone: '555-0103', mobile: '555-0203', preferredContact: 'mobile', notes: 'Follow up next week.' }
     ],
     deals: [
         { id: 'd1', title: 'Acme Premium Upgrade', value: 5000, stage: 'negotiating', contactId: 'c1', createdAt: new Date().toISOString() },
@@ -98,13 +98,17 @@ class Database {
         return this.data.deals || [];
     }
 
+    getDeal(id) {
+        return this.getDeals().find(d => d.id === id);
+    }
+
     getDealsByStage(stage) {
         return this.getDeals().filter(d => d.stage === stage);
     }
 
     addDeal(deal) {
         deal.id = 'd' + Date.now();
-        if(!deal.createdAt) deal.createdAt = new Date().toISOString();
+        if (!deal.createdAt) deal.createdAt = new Date().toISOString();
         this.data.deals.push(deal);
         this.saveData();
         return deal;
@@ -124,18 +128,18 @@ class Database {
         this.data.deals = this.data.deals.filter(d => d.id !== id);
         this.saveData();
     }
-    
+
     // --- Export / Import ---
     exportJSON() {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data, null, 2));
         const downloadAnchorNode = document.createElement('a');
-        downloadAnchorNode.setAttribute("href",     dataStr);
-        downloadAnchorNode.setAttribute("download", "crm_backup_" + new Date().toISOString().slice(0,10) + ".json");
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "crm_backup_" + new Date().toISOString().slice(0, 10) + ".json");
         document.body.appendChild(downloadAnchorNode); // required for firefox
         downloadAnchorNode.click();
         downloadAnchorNode.remove();
     }
-    
+
     importJSON(jsonString) {
         try {
             const parsed = JSON.parse(jsonString);

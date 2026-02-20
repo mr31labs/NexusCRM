@@ -146,6 +146,8 @@ class App {
                 email: document.getElementById('contact-email').value,
                 company: document.getElementById('contact-company').value,
                 phone: document.getElementById('contact-phone').value,
+                mobile: document.getElementById('contact-mobile').value,
+                preferredContact: document.getElementById('contact-preferred').value,
                 notes: document.getElementById('contact-notes').value
             };
 
@@ -207,6 +209,8 @@ class App {
                 document.getElementById('contact-email').value = c.email || '';
                 document.getElementById('contact-company').value = c.company || '';
                 document.getElementById('contact-phone').value = c.phone || '';
+                document.getElementById('contact-mobile').value = c.mobile || '';
+                document.getElementById('contact-preferred').value = c.preferredContact || 'email';
                 document.getElementById('contact-notes').value = c.notes || '';
                 document.getElementById('contact-modal-title').textContent = 'Edit Contact';
             }
@@ -223,7 +227,15 @@ class App {
         ui.populateContactSelects();
 
         if (id) {
-            const d = db.getDeal(id); // NOTE: Requires getDeal in db.js if we want edit deal, currently only add/update implemented loosely. We'll skip edit for MVP deals specifically or add it.
+            const d = db.getDeal(id);
+            if (d) {
+                document.getElementById('deal-id').value = d.id;
+                document.getElementById('deal-title').value = d.title;
+                document.getElementById('deal-value').value = d.value;
+                document.getElementById('deal-contact').value = d.contactId;
+                document.getElementById('deal-stage').value = d.stage;
+                document.getElementById('deal-modal-title').textContent = 'Edit Deal';
+            }
         }
         ui.openModal('deal-modal');
     }

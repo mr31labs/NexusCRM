@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +11,17 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Phosphor Icons for minimalist beautiful icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Chart.js for Forecast Graph -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="theme-dark">
+
+<body>
     <div id="app" class="app-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                     <i class="ph-fill ph-planet"></i> Nexus CRM
+                    <i class="ph-fill ph-planet"></i> Nexus CRM
                 </div>
             </div>
             <ul class="nav-links">
@@ -54,10 +58,21 @@
                         <p class="subtitle">Track your active deals and close more business.</p>
                     </div>
                     <div class="header-actions">
-                        <button id="deal-insights-btn" class="btn btn-ai"><i class="ph-fill ph-magic-wand"></i> AI Insights</button>
-                        <button class="btn btn-primary" onclick="app.handlers.openDealModal()"><i class="ph ph-plus"></i> Add Deal</button>
+                        <button id="deal-insights-btn" class="btn btn-ai"><i class="ph-fill ph-magic-wand"></i> AI
+                            Insights</button>
+                        <button class="btn btn-primary" onclick="app.handlers.openDealModal()"><i
+                                class="ph ph-plus"></i> Add Deal</button>
                     </div>
                 </header>
+
+                <!-- Forecast Dashboard Container -->
+                <div class="dashboard-top-row">
+                    <div class="dashboard-title">Revenue Forecast Chart</div>
+                    <div class="canvas-container">
+                        <canvas id="forecast-chart"></canvas>
+                    </div>
+                </div>
+
                 <div class="kanban-board">
                     <!-- Columns will be injected by JS -->
                 </div>
@@ -75,7 +90,8 @@
                             <i class="ph ph-magnifying-glass"></i>
                             <input type="text" id="contact-search" placeholder="Search contacts...">
                         </div>
-                        <button class="btn btn-primary" onclick="app.handlers.openContactModal()"><i class="ph ph-plus"></i> Add Contact</button>
+                        <button class="btn btn-primary" onclick="app.handlers.openContactModal()"><i
+                                class="ph ph-plus"></i> Add Contact</button>
                     </div>
                 </header>
                 <div class="contacts-list">
@@ -93,24 +109,30 @@
                 </header>
                 <div class="settings-container panel">
                     <h2>AI Integration</h2>
-                    <p class="settings-desc">Nexus CRM uses the Gemini API to supercharge your workflow. Your key is stored securely in this browser's local storage and never sent to a third-party server besides Google.</p>
-                    
+                    <p class="settings-desc">Nexus CRM uses the Gemini API to supercharge your workflow. Your key is
+                        stored securely in this browser's local storage and never sent to a third-party server besides
+                        Google.</p>
+
                     <form id="settings-form">
                         <div class="form-group">
                             <label for="setting-api-key">Gemini API Key</label>
                             <input type="password" id="setting-api-key" placeholder="AIzaSy...">
                         </div>
-                        
+
                         <div class="settings-actions">
                             <button type="submit" class="btn btn-primary">Save Settings</button>
                         </div>
                     </form>
 
                     <h2 class="mt-4">Data Management</h2>
-                    <p class="settings-desc">Export your entire CRM database as a JSON file, or import an existing backup.</p>
+                    <p class="settings-desc">Export your entire CRM database as a JSON file, or import an existing
+                        backup.</p>
                     <div class="data-actions">
-                        <button id="export-btn" class="btn btn-secondary"><i class="ph ph-download-simple"></i> Export JSON</button>
-                        <button id="import-btn" class="btn btn-outline" onclick="document.getElementById('import-file').click()"><i class="ph ph-upload-simple"></i> Import JSON</button>
+                        <button id="export-btn" class="btn btn-secondary"><i class="ph ph-download-simple"></i> Export
+                            JSON</button>
+                        <button id="import-btn" class="btn btn-outline"
+                            onclick="document.getElementById('import-file').click()"><i class="ph ph-upload-simple"></i>
+                            Import JSON</button>
                         <input type="file" id="import-file" style="display: none" accept=".json">
                     </div>
                 </div>
@@ -144,6 +166,18 @@
             <div class="form-group">
                 <label>Phone</label>
                 <input type="text" id="contact-phone">
+            </div>
+            <div class="form-group">
+                <label>Mobile</label>
+                <input type="text" id="contact-mobile">
+            </div>
+            <div class="form-group">
+                <label>Preferred Contact Method</label>
+                <select id="contact-preferred">
+                    <option value="email">Email</option>
+                    <option value="phone">Phone</option>
+                    <option value="mobile">Mobile</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Notes</label>
@@ -212,7 +246,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline close-modal">Close</button>
-                <button type="button" class="btn btn-primary" id="ai-copy-btn" style="display:none"><i class="ph ph-copy"></i> Copy to Clipboard</button>
+                <button type="button" class="btn btn-primary" id="ai-copy-btn" style="display:none"><i
+                        class="ph ph-copy"></i> Copy to Clipboard</button>
             </div>
         </div>
     </div>
@@ -222,4 +257,5 @@
 
     <script type="module" src="js/app.js"></script>
 </body>
+
 </html>
