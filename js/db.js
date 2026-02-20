@@ -17,9 +17,9 @@ const defaultData = {
         { id: 'c3', name: 'Charlie Brown', email: 'charlie@example.com', company: 'Peanuts LLC', phone: '555-0103', mobile: '555-0203', preferredContact: 'mobile', notes: 'Follow up next week.' }
     ],
     deals: [
-        { id: 'd1', title: 'Acme Premium Upgrade', value: 5000, stage: 'negotiating', contactId: 'c1', createdAt: new Date().toISOString() },
-        { id: 'd2', title: 'Bob Custom Build', value: 12000, stage: 'contacted', contactId: 'c2', createdAt: new Date().toISOString() },
-        { id: 'd3', title: 'Peanuts Initial Retainer', value: 2000, stage: 'lead', contactId: 'c3', createdAt: new Date().toISOString() }
+        { id: 'd1', title: 'Acme Premium Upgrade', value: 5000, stage: 'negotiating', contactId: 'c1', createdAt: new Date().toISOString(), notes: 'Alice is very interested in the premium support package.' },
+        { id: 'd2', title: 'Bob Custom Build', value: 12000, stage: 'contacted', contactId: 'c2', createdAt: new Date().toISOString(), notes: 'Sent over the initial SOW. Waiting on technical review.' },
+        { id: 'd3', title: 'Peanuts Initial Retainer', value: 2000, stage: 'lead', contactId: 'c3', createdAt: new Date().toISOString(), notes: 'Met at the conference. Needs a simple retainer setup.' }
     ]
 };
 

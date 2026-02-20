@@ -50,6 +50,14 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
+            <div class="mobile-top-bar">
+                <div class="logo">
+                    <i class="ph-fill ph-planet"></i> Nexus CRM
+                </div>
+                <button id="mobile-menu-btn" class="btn-icon" onclick="app.handlers.toggleSidebar()">
+                    <i class="ph ph-list" style="font-size: 1.5rem;"></i>
+                </button>
+            </div>
             <!-- Pipeline View (Kanban) -->
             <section id="pipeline-view" class="view-section active">
                 <header class="view-header">
@@ -221,6 +229,10 @@
                     <option value="won">Won</option>
                     <option value="lost">Lost</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea id="deal-notes" rows="3"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline close-modal">Cancel</button>

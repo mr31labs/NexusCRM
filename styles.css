@@ -646,6 +646,12 @@ textarea::placeholder {
     border-bottom: 1px solid var(--border-color);
 }
 
+.contacts-table th:last-child,
+.contacts-table td:last-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
 .contacts-table th {
     font-weight: 500;
     color: var(--text-secondary);
@@ -687,7 +693,7 @@ textarea::placeholder {
 .td-actions {
     display: flex;
     gap: 0.25rem;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 /* =============== MODALS =============== */
@@ -855,4 +861,82 @@ textarea::placeholder {
 
 .toast.show {
     transform: translateX(0);
+}
+
+/* =============== MOBILE RESPONSIVENESS =============== */
+.mobile-top-bar {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-top: -2rem;
+}
+
+.mobile-top-bar .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        bottom: 0;
+        z-index: 1000;
+        transition: transform var(--trans-medium);
+        box-shadow: var(--shadow-md);
+    }
+
+    .sidebar.open {
+        transform: translateX(260px);
+    }
+
+    .mobile-top-bar {
+        display: flex;
+    }
+
+    .main-content {
+        padding: 2rem 1rem 1rem 1rem;
+    }
+
+    .mobile-top-bar {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        margin-top: -2rem;
+    }
+
+    .view-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-top-row {
+        flex-direction: column;
+    }
+
+    .panel,
+    .canvas-container {
+        width: 100%;
+    }
 }

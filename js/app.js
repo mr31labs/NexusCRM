@@ -24,7 +24,8 @@ class App {
                 allowDrop: this.allowDrop.bind(this),
                 dropDeal: this.dropDeal.bind(this),
                 draftEmail: this.draftEmail.bind(this),
-                dealInsights: this.dealInsights.bind(this)
+                dealInsights: this.dealInsights.bind(this),
+                toggleSidebar: this.toggleSidebar.bind(this)
             }
         };
 
@@ -37,6 +38,10 @@ class App {
     refreshViews() {
         ui.renderContacts(db.getContacts());
         ui.renderPipeline();
+    }
+
+    toggleSidebar() {
+        document.querySelector('.sidebar').classList.toggle('open');
     }
 
     // --- Navigation ---
@@ -54,6 +59,11 @@ class App {
                 // Show target view
                 const targetId = link.getAttribute('data-target');
                 document.getElementById(targetId).classList.add('active');
+
+                // Close sidebar on mobile
+                if (window.innerWidth <= 768) {
+                    this.toggleSidebar();
+                }
 
                 if (targetId === 'contacts-view') {
                     document.getElementById('contact-search').focus();
@@ -171,7 +181,8 @@ class App {
                 title: document.getElementById('deal-title').value,
                 value: Number(document.getElementById('deal-value').value),
                 contactId: document.getElementById('deal-contact').value,
-                stage: document.getElementById('deal-stage').value
+                stage: document.getElementById('deal-stage').value,
+                notes: document.getElementById('deal-notes').value
             };
 
             const id = document.getElementById('deal-id').value;
@@ -234,6 +245,7 @@ class App {
                 document.getElementById('deal-value').value = d.value;
                 document.getElementById('deal-contact').value = d.contactId;
                 document.getElementById('deal-stage').value = d.stage;
+                document.getElementById('deal-notes').value = d.notes || '';
                 document.getElementById('deal-modal-title').textContent = 'Edit Deal';
             }
         }
