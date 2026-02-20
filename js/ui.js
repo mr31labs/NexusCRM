@@ -163,7 +163,7 @@ class UI {
         ctx.style.height = '100%';
 
         // Aggregate deal values by stage
-        const stages = ['lead', 'contacted', 'negotiating', 'won']; // Exclude lost from forecast
+        const stages = ['lead', 'contacted', 'negotiating', 'won', 'lost'];
         const values = stages.map(stage => {
             return db.getDealsByStage(stage).reduce((sum, d) => sum + Number(d.value), 0);
         });
@@ -180,7 +180,7 @@ class UI {
         this.currentChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Lead', 'Contacted', 'Negotiating', 'Won'],
+                labels: ['Lead', 'Contacted', 'Negotiating', 'Won', 'Lost'],
                 datasets: [{
                     label: 'Pipeline Value',
                     data: values,
@@ -188,13 +188,15 @@ class UI {
                         'rgba(14, 165, 233, 0.7)',  // sky-500
                         'rgba(37, 99, 235, 0.7)',   // blue-600
                         'rgba(245, 158, 11, 0.7)',  // amber-500
-                        'rgba(16, 185, 129, 0.7)'   // emerald-500
+                        'rgba(16, 185, 129, 0.7)',  // emerald-500
+                        'rgba(239, 68, 68, 0.7)'    // red-500
                     ],
                     borderColor: [
                         '#0ea5e9',
                         '#2563eb',
                         '#f59e0b',
-                        '#10b981'
+                        '#10b981',
+                        '#ef4444'
                     ],
                     borderWidth: 1,
                     borderRadius: 4, // Professional rounded bar corners
